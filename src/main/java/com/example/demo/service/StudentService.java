@@ -10,4 +10,7 @@ public interface StudentService {
     List<StudentDto> getAllStudents();
     StudentDto getStudentByID(Long id);
     StudentDto createStudent(AddRequestDto addRequestDto);
+    Void deleteStudent(Long id);
+
+    StudentDto updateStudent(Long id, AddRequestDto addRequestDto);
 }

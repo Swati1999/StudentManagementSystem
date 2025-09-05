@@ -38,4 +38,33 @@ public class StudentServiceImpl implements StudentService {
         Student student = studentRepository.save(newStudent);
         return modelMapper.map(student, StudentDto.class);
     }
+    @Override
+    public Void deleteStudent(Long id) {
+        //check if student exists
+        if(!studentRepository.existsById(id)){
+            try {
+                throw new IllegalAccessException("Student not present with this id : "+id);
+            } catch (IllegalAccessException e) {
+                System.out.println(e);
+            }
+        }
+        studentRepository.deleteById(id);
+
+        return null;
+    }
+
+
+    @Override
+    public StudentDto updateStudent(Long id, AddRequestDto addRequestDto) {
+        Student student = studentRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Student not present with this id"));
+
+        // Map DTO to entity (id is not present, so won't be overwritten)
+        modelMapper.map(addRequestDto, student);
+
+        student = studentRepository.save(student);
+
+        return modelMapper.map(student, StudentDto.class);
+    }
+
 }
