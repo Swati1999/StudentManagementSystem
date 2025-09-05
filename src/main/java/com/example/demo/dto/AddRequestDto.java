@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
     @AllArgsConstructor
     @NoArgsConstructor
     public class AddRequestDto {
-        private Long id;
         private String name;
         private String email;
     }
